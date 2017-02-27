@@ -23,7 +23,8 @@ public class Umlparser {
 	}
 	
 	
-	public String parseit(String image){
+	public String parseit(String image)
+	{
 		
 		for(File file : allfiles){
 			
