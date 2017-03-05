@@ -36,6 +36,45 @@ public class Umlparser {
 			functionList = new ArrayList<String>();
 			constructorList = new ArrayList<String>();
 			URL.append("[");
+			FileInputStream inputStream = new FileInputStream(folder.toString()+"/"+file.getName().split("\\.")[0]+".java");
+					CompilationUnit unitc = JavaParser.parse(inputStream);
+					List<Node> childrenNodes = unitc.getChildrenNodes();
+					for(Node eachchild : childrenNodes)
+					{
+						if(eachchild instanceof ClassOrInterfaceDeclaration)
+						{
+							ClassOrInterfaceDeclaration cIDec = (ClassOrInterfaceDeclaration)eachchild;
+							
+							// create a list with interfaces as entries
+							
+							if(cIDec.isInterface())
+							{
+								interfaceList.add(cIDec.getName());
+								URL.append("<<Interface>>;");
+								URL.append(cIDec.getName());
+								URL.append("");
+								flag=false;
+								continue;
+							}
+							flag=true;
+							URL.append(cIDec.getName());
+							className = cIDec.getName();
+							// create HashMaps to map classes with interfaces and parent classes for implements and extends relation
+							
+							List<ClassOrInterfaceType> implementsList = cIDec.getImplements();
+							if(implementsList!=null)
+							{
+								classInterfaceMap.put(classInterfaceDec.getName(), implementsList);
+							}
+							
+							List<ClassOrInterfaceType> extendsList = cIDec.getExtends();
+							if(extendsList!=null)
+							{
+								classSuperClassMap.put(cIDec.getName(), extendsList);
+							}
+							
+						}
+					}// end of for loop for chil
 		}
 		return null;
 	}
