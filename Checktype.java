@@ -13,7 +13,7 @@ List<TypeDeclaration> Types = unitc.getTypes();
 									String p="";
 									FieldDeclaration fidec = (FieldDeclaration)body;
 									
-									int f = fieldDec.getModifiers();
+									int f = fidec.getModifiers();
 									boolean doesexist = false;
 
 									switch(f)
