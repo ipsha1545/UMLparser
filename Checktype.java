@@ -28,6 +28,66 @@ List<TypeDeclaration> Types = unitc.getTypes();
 										break;
 									
 									}
+									
+									if(doesexist)
+									{
+										boolean newdoesexist = true;
+
+										
+										
+										List<Node> f = fieldDec.getChildrenNodes();
+										
+										for(Node Nodes :f)
+										{
+											if(Nodes instanceof ReferenceType)
+											{
+												String refType = ((ReferenceType) Nodes).getType().toString();
+												if(refType.equals("String"))
+												{
+													primitiveType += refType;
+												}
+												else
+												{
+													boolean foundPrimitive = false;
+													boolean foundCollection = false;
+
+													for(String primitiveRef : primitives)
+													{
+														if(refType.contains(primitiveRef))
+														{
+															primitiveType += refType+"(*)";
+															foundPrimitive = true;
+															break;
+														}
+													}
+													if(!foundPrimitive)
+													{
+														// logic for checking multiplicity
+														if(checkForMultiplicity(refType,className))
+														{
+															newdoesexist = false;
+															foundCollection = true;
+															break;
+														}
+														
+													}
+												}
+											}
+											else if(Nodes instanceof PrimitiveType)
+											{
+												PrimitiveType pType = (PrimitiveType)Nodes;
+												primitiveType = pType.toString();
+											}
+											if(Nodes instanceof VariableDeclarator && newdoesexist)
+											{
+												VariableDeclarator variableDec = (VariableDeclarator)Nodes;
+												//System.out.println(className + variableDeclarator);
+												variableList.add(accessModifier+variableDec.toString()+":"+primitiveType);
+											}
+										}
+									}
+									
+								}
 
 								}
                 
