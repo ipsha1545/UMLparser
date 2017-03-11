@@ -85,13 +85,13 @@ List<TypeDeclaration> Types = unitc.getTypes();
 												variableList.add(accessModifier+variableDec.toString()+":"+primitiveType);
 											}
 										}
-									}
+								        }
 									
 								}
 
-								}
+						     }
                 
-						 }		
+				           }		
                         
                            }
             
