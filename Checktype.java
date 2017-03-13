@@ -81,7 +81,6 @@ List<TypeDeclaration> Types = unitc.getTypes();
 											if(Nodes instanceof VariableDeclarator && newdoesexist)
 											{
 												VariableDeclarator variableDec = (VariableDeclarator)Nodes;
-												//System.out.println(className + variableDeclarator);
 												variableList.add(accessModifier+variableDec.toString()+":"+primitiveType);
 											}
 										}
