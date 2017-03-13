@@ -44,10 +44,7 @@ public class Umlparser {
 						if(eachchild instanceof ClassOrInterfaceDeclaration)
 						{
 							ClassOrInterfaceDeclaration cIDec = (ClassOrInterfaceDeclaration)eachchild;
-							
-							// create a list with interfaces as entries
-							
-							if(cIDec.isInterface())
+						        if(cIDec.isInterface())
 							{
 								interfaceList.add(cIDec.getName());
 								URL.append("<<Interface>>;");
@@ -59,9 +56,7 @@ public class Umlparser {
 							flag=true;
 							URL.append(cIDec.getName());
 							className = cIDec.getName();
-							// create HashMaps to map classes with interfaces and parent classes for implements and extends relation
-							
-							List<ClassOrInterfaceType> implementsList = cIDec.getImplements();
+						        List<ClassOrInterfaceType> implementsList = cIDec.getImplements();
 							if(implementsList!=null)
 							{
 								classInterfaceMap.put(classInterfaceDec.getName(), implementsList);
@@ -74,7 +69,7 @@ public class Umlparser {
 							}
 							
 						}
-					}// end of for loop for chil
+					}
 		}
 		return null;
 	}
