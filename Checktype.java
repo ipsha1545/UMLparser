@@ -1,4 +1,9 @@
-List<TypeDeclaration> Types = unitc.getTypes();
+public class Checktype{
+	
+boolean istrue = true;	
+	
+public void checktype(){
+	List<TypeDeclaration> Types = unitc.getTypes();
 					for(TypeDeclaration anyonetype : Types)
 					{
 						List<BodyDeclaration> mydec = bodyType.getMembers();
@@ -87,11 +92,35 @@ List<TypeDeclaration> Types = unitc.getTypes();
 								        }
 									
 								}
+								
+								else if(body instanceof MethodDeclaration)
+								{
+									if(istrue==true){
+									String temporary = "";
+									MethodDeclaration method = (MethodDeclaration)body;
+									String ma = "";
+									String mr = "";
+									String mN = "";
+									int m = method.getModifiers();
+									boolean doesnotexist = false;
+
+									switch(m)
+									{
+									case ModifierSet.PUBLIC:
+										ma = "+";
+										doesnotexist = true;
+										break;
+									case ModifierSet.PUBLIC+ModifierSet.STATIC:
+										ma = "+";
+										doesnotexist = true;
+										break;
+									} 
+  								}
 
 						     }
                 
 				           }		
-                        
+			           }
                            }
-            
+                   }
          }    
