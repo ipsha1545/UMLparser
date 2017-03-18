@@ -114,7 +114,26 @@ public void checktype(){
 										ma = "+";
 										doesnotexist = true;
 										break;
-									} 
+								    }
+									if(doesexist)
+									 {
+										List<Node> mynodechild =   method.getChildrenNodes();
+
+										for(Node eachchildnode : mynodechild)
+										{
+											if(eachchildnode instanceof ReferenceType)
+											{
+												ReferenceType rM = (ReferenceType)eachchildnode;
+
+												methodRefType = rM.getType().toString();
+											}
+											else if(eachchildnode instanceof VoidType)
+											{
+												methodRefType = "void";
+											}
+										}
+
+									}
   								}
 
 						     }
