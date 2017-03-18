@@ -132,6 +132,22 @@ public void checktype(){
 												methodRefType = "void";
 											}
 										}
+										Name  = method.getName();
+	
+										List<Parameter Param = method.getParameters();
+
+										ListofParam = new ArrayList<String>();
+
+										if(Param.size() > 0)
+										{
+											tempMethodParam += "(";
+											for(Parameter eachparam : Param)
+											{
+												List<Node> Childparam = param.getChildrenNodes();
+
+												String methodParamReferenceType="", variable="";
+
+										}
 
 									}
   								}
