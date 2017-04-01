@@ -137,7 +137,7 @@ for(TypeDeclaration anyonetype : Types)
 								}
 								if(!foundPrimitive)
 								{
-									// logic for checking multiplicity
+									
 									if(checkForMultiplicity(refType,className))
 									{
 										newdoesexist = false;
@@ -234,14 +234,35 @@ for(TypeDeclaration anyonetype : Types)
 						methodParamReferenceType = rtype.getType().toString();
 						CheckDependency cdep = new CheckDependency(className,method);
 						usesMap=cdep.checkDependency(interfaceList);
-				        }	
+				        }
+					
 
-			              }			
+			              }	
+							
+				   ListofParam.add(variable+":"+methodParamReferenceType); 
 
                                    }
-
-
+				for(int i=0; i<ListofParam.size() ; i++)
+				{
+					if(i != ListofParam.size()-1)
+					{
+						tempConstruct += ListofParam.get(i)+",";
+					}
+					else
+					{
+						tempConstruct += ListofParam.get(i);
+					}
+				    }
+				    tempConstruct += ")";		
 				}
+				else
+				{
+					tempConstruct = "()";
+				}
+				constructList.add(constructAccessModifier+constrctName+tempConstruct);		
+				
+				}
+					
 	  	               }
 
 
