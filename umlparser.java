@@ -269,19 +269,30 @@ for(TypeDeclaration anyonetype : Types)
                              }
 	                
 			  }
-			if(vList.size() > 0)
+			if(attributeList.size() > 0)
 			{
 			 URL.append("|");
-			 for(int i=0 ; i<vList.size() ; i++)
+			 for(int i=0 ; i<attributeList.size() ; i++)
 			  {
-				if(i != vList.size()-1)
-					URL.append(vList.get(i)+";");
+				if(i != attributeList.size()-1)
+					URL.append(attributeList.get(i)+";");
 				else
-					URL.append(vList.get(i));
-			   }
+					URL.append(attributeList.get(i));
+			    }
 
 			  }
-				            
+		       if(functionList.size() > 0)
+			{
+			URL.append("|");
+			for(int i=0 ; i<functionList.size() ; i++)
+			    {
+				if(i != functionList.size()-1)
+					bodyURL.append(functionList.get(i)+";");
+				else
+					bodyURL.append(functionList.get(i)+";");
+			    }
+			  }
+
 	                }
 	              }
 	           }
