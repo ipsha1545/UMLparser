@@ -23,10 +23,11 @@ public class Umlparser {
 	}
 	
 	
-	public String parseit(String image)
-	{
+  public String parseit(String image)
+   {
 		
-	for(File file : allfiles){
+    for(File file : allfiles)
+     {
 
 	if(URL.length() > 0 && (URL.charAt(URL.length()-1) != ','))
 	{
@@ -68,9 +69,9 @@ public class Umlparser {
 		classSuperClassMap.put(cIDec.getName(), extendsList);
 	}
 
-}
-}
-	List<TypeDeclaration> Types = unitc.getTypes();
+      }
+   }
+List<TypeDeclaration> Types = unitc.getTypes();
 for(TypeDeclaration anyonetype : Types)
 {
 	List<BodyDeclaration> mydec = bodyType.getMembers();
@@ -159,7 +160,7 @@ for(TypeDeclaration anyonetype : Types)
 							variableList.add(accessModifier+variableDec.toString()+":"+primitiveType);
 						}
 					}
-			    }
+			         }
 
 			}
 
@@ -265,19 +266,15 @@ for(TypeDeclaration anyonetype : Types)
 					
 	  	               }
 
-
-			    }
+                             }
 	                
 			  }		
 				            
 	                }
-	                           
-							
-		     }
+	              }
 	           }
 	       
 		}
 		return null;
 	}
-	
 }
