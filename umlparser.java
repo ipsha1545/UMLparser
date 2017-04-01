@@ -268,7 +268,19 @@ for(TypeDeclaration anyonetype : Types)
 
                              }
 	                
-			  }		
+			  }
+			if(vList.size() > 0)
+			{
+			 URL.append("|");
+			 for(int i=0 ; i<vList.size() ; i++)
+			  {
+				if(i != vList.size()-1)
+					URL.append(vList.get(i)+";");
+				else
+					URL.append(vList.get(i));
+			   }
+
+			  }
 				            
 	                }
 	              }
