@@ -292,6 +292,30 @@ for(TypeDeclaration anyonetype : Types)
 					bodyURL.append(functionList.get(i)+";");
 			    }
 			  }
+	if(constructorList.size() > 0)
+	    {
+	      if(methodList.isEmpty() && methodList.size()==0)
+		{
+		URL.append("|");
+		for(int i=0 ; i<constructorList.size() ; i++)
+		   {
+			if(i != constructorList.size()-1)
+				URL.append(constructorList.get(i)+";");
+			else
+				URL.append(constructorList.get(i));
+		    }
+		  }
+		else
+		  {
+		     for(int i=0 ; i<constructorList.size() ; i++)
+			      {
+				if(i != constructorList.size()-1)
+					URL.append(constconstructorListructList.get(i)+";");
+				else
+					URL.append(constructorList.get(i));
+				}
+			     }
+		           }
 
 	                }
 	              }
