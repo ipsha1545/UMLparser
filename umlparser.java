@@ -10,6 +10,7 @@ public class Umlparser {
 	private ArrayList<String> attributeList = new ArrayList<String>();
 	private ArrayList<String> functionList = new ArrayList<String>();
 	private ArrayList<String> constructorList = new ArrayList<String>();
+	private ConcurrentHashMap<String,String> usesMap = new ConcurrentHashMap<String,String>();
 	
 		
 	
@@ -321,7 +322,20 @@ for(TypeDeclaration anyonetype : Types)
 
 	                }
 	              }
-	           }
+	             if(!usesMap.isEmpty() && usesMap.size()>0)
+			{
+				System.out.println(usesMap);
+				for(String keys : usesMap.keySet())
+				{
+					String t = keys;
+					URL.append("[");
+					URL.append(usesMap.get(t));
+					URL.append("]uses -.->[<<interface>>;");
+					URL.append(t);
+					URL.append("],");
+				}
+			}
+	            
 	       
 		}
 		return null;
