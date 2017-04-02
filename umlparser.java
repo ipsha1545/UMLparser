@@ -316,6 +316,8 @@ for(TypeDeclaration anyonetype : Types)
 				}
 			     }
 		           }
+		           URL.append("]");
+	                   URL.append(",");
 
 	                }
 	              }
