@@ -334,6 +334,19 @@ for(TypeDeclaration anyonetype : Types)
 					URL.append(t);
 					URL.append("],");
 				}
+			     if(!Mapu.isEmpty() && Mapu.size()>0)
+				{
+					System.out.println(Mapu);
+					for(String keys : Mapu.keySet())
+					{
+						String tempKey = keys;
+						URL.append("[");
+						URL.append(tempKey);
+						URL.append("]uses -.->[<<interface>>;");
+						URL.append(Mapu.get(tempKey));
+						URL.append("],");
+					}
+				}
 			}
 	            
 	       
