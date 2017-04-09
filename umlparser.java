@@ -11,6 +11,8 @@ public class Umlparser {
 	private ArrayList<String> functionList = new ArrayList<String>();
 	private ArrayList<String> constructorList = new ArrayList<String>();
 	private ConcurrentHashMap<String,String> Mapu = new ConcurrentHashMap<String,String>();
+	private ConcurrentHashMap<String,String> checkmulti = new ConcurrentHashMap<String,String>();
+	private String doesuse="";
 	
 		
 	
@@ -347,6 +349,26 @@ for(TypeDeclaration anyonetype : Types)
 						URL.append("],");
 					}
 				}
+		     if(!checkmulti.isEmpty() && checkmulti.size()>0)
+		{
+			for(String tags : checkmulti.keySet())
+			{
+				String tag = tags;
+				if(interfaceList.contains(tag.split("\\~")[1]))
+				{
+					doesuse += "["+tag.split("\\~")[0]+"]"+checkmulti.get(tag)+"[<<interface>>;"+tag.split("\\~")[1]+"],";
+				}
+				else
+				{
+					doesuse += "["+tag.split("\\~")[0]+"]"+checkmulti.get(tag)+"["+tag.split("\\~")[1]+"],";
+				}
+
+				System.out.println(" tag "+tag);
+
+					
+				}
+			    }
+			     
 			}
 	            
 	       
