@@ -15,6 +15,7 @@ public class Umlparser {
 	private HashMap<String,List<ClassOrInterfaceType>> CS = new HashMap<String,List<ClassOrInterfaceType>>();
 	private String doesuse="";
 	private HashMap<String,List<ClassOrInterfaceType>> CI = new HashMap<String,List<CI>>();
+	private String doesuseInter="";
 	
 		
 	
@@ -390,8 +391,12 @@ for(TypeDeclaration anyonetype : Types)
 					}
 				   }
 			      }
-			}	  
+			 }
 			     
+	                URL.append(doesuse);
+			URL.append(doesuseInter);
+			URL.deleteCharAt(URL.length()-1);
+		     
 		  }
 	            
 	       
