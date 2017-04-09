@@ -392,12 +392,30 @@ for(TypeDeclaration anyonetype : Types)
 				   }
 			      }
 			 }
-			     
-	                URL.append(doesuse);
-			URL.append(doesuseInter);
-			URL.deleteCharAt(URL.length()-1);
-		     
-		  }
+		       for(String tag : CS.keySet() )
+			{
+				String tmpKey = tag;
+				List<ClassOrInterfaceType> tmpList = classSuperClassMap.get(tmpKey);
+				
+				if( tmpList != null)
+				{
+				for(int i=0;i<tmpList.size();i++)
+				{
+					if(!tmpList.isEmpty())
+					{
+						if(tmpList.get(i)!=null)
+						{
+							URL = URL.append("["+tmpList.get(i)+"]^-["+tmpKey+"],");
+							//System.out.println(url);
+						}
+						
+					  }
+				   }
+			    }
+			}	     
+			
+		    }
+	    
 	            
 	       
 	      }
