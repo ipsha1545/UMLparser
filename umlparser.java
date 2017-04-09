@@ -350,9 +350,9 @@ for(TypeDeclaration anyonetype : Types)
 					}
 				}
 		     if(!checkmulti.isEmpty() && checkmulti.size()>0)
-		{
+		        {
 			for(String tags : checkmulti.keySet())
-			{
+			    {
 				String tag = tags;
 				if(interfaceList.contains(tag.split("\\~")[1]))
 				{
