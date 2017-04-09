@@ -12,7 +12,9 @@ public class Umlparser {
 	private ArrayList<String> constructorList = new ArrayList<String>();
 	private ConcurrentHashMap<String,String> Mapu = new ConcurrentHashMap<String,String>();
 	private ConcurrentHashMap<String,String> checkmulti = new ConcurrentHashMap<String,String>();
+	private HashMap<String,List<ClassOrInterfaceType>> CS = new HashMap<String,List<ClassOrInterfaceType>>();
 	private String doesuse="";
+	private HashMap<String,List<ClassOrInterfaceType>> CI = new HashMap<String,List<CI>>();
 	
 		
 	
