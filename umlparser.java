@@ -337,13 +337,13 @@ for(TypeDeclaration anyonetype : Types)
 			     if(!Mapu.isEmpty() && Mapu.size()>0)
 				{
 					System.out.println(Mapu);
-					for(String keys : Mapu.keySet())
+					for(String tags : Mapu.keySet())
 					{
-						String tempKey = keys;
+						String tag = tags;
 						URL.append("[");
-						URL.append(tempKey);
+						URL.append(tag);
 						URL.append("]uses -.->[<<interface>>;");
-						URL.append(Mapu.get(tempKey));
+						URL.append(Mapu.get(tag));
 						URL.append("],");
 					}
 				}
