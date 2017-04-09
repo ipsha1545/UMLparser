@@ -370,17 +370,17 @@ for(TypeDeclaration anyonetype : Types)
 					
 				}
 			    }
-			   for(String tag : CI.keySet() )
-			{
-				String tmp = tag;
-				List<ClassOrInterfaceType> tmpList = CI.get(tmp);
-				URL = URL.append("[<<interface>>;"+tmpList.get(i)+"]^-.-["+tmp+"],");
-			}	  
+		   for(String tag : CI.keySet() )
+		    {
+			String tmp = tag;
+			List<ClassOrInterfaceType> tmpList = CI.get(tmp);
+			URL = URL.append("[<<interface>>;"+tmpList.get(i)+"]^-.-["+tmp+"],");
+		    }	  
 			     
-			}
+		  }
 	            
 	       
-		}
-		return null;
-	}
+	      }
+	    return null;
+        }
 }
