@@ -416,7 +416,12 @@ for(TypeDeclaration anyonetype : Types)
 					  }
 				   }
 			    }
-			}	     
+			}
+		     
+			URL.append(doesuse);
+			URL.append(doesuseInter);
+			URL.deleteCharAt(bodyURL.length()-1);	     
+			     
 			
 		    }
 	    
