@@ -452,7 +452,12 @@ for(TypeDeclaration anyonetype : Types)
 			//System.out.println("strClass "+referenceClass);
 			rValue="1-*";
 			rKey=className+"~"+rClass;
-			reRKey=rClass+"~"+className; 
+			reRKey=rClass+"~"+className;
+			
+			if(checkmulti.isEmpty())
+			{
+				checkmulti.put(rKey, rValue);
+			}
 		}
 	    
 	            
