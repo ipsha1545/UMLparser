@@ -475,6 +475,9 @@ for(TypeDeclaration anyonetype : Types)
 					}
 				}
 			}
+			
+			System.out.println(checkmulti);
+			return true;
 		    
 		   
 		    }
