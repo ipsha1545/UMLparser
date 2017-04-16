@@ -486,6 +486,11 @@ for(TypeDeclaration anyonetype : Types)
 			rValue="1-1";
 			rKey=className+"~"+rClass;
 			revRKey=rClass+"~"+className;
+	      if(checkmulti.isEmpty())
+		{
+			checkmulti.put(rKey, rValue);
+
+		}
 	    
 	            
 	       
