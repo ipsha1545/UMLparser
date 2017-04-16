@@ -436,8 +436,13 @@ for(TypeDeclaration anyonetype : Types)
 			Java2UMLParser.getImage("https://yuml.me/diagram/plain/class/draw/"+ bodyURL.toString(), image);
 			return URL.toString();		     
 			     
-			
-		    }
+		}
+	       public boolean checkForMultiplicity(String referenceClass,String className)
+	       {
+			String rValue="";
+			String rKey="";
+			String reRKey="";
+	        }
 	    
 	            
 	       
