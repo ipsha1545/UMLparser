@@ -458,7 +458,26 @@ for(TypeDeclaration anyonetype : Types)
 			{
 				checkmulti.put(rKey, rValue);
 			}
-		}
+			
+			else if(!checkmulti.isEmpty() && checkmulti.size()>0)
+			{
+				if(!checkmulti.containsKey(relationKey) && !checkmulti.containsKey(reverseRelationKey))
+				{
+					for(String key : checkmulti.keySet())
+					{
+						String tmpKey = key;
+					//	System.out.println(" tempKey "+tempKey+" reverseRelationKey "+reverseRelationKey +" "+tempKey.equals(reverseRelationKey));
+						if(tmpKey.equals(reverseRelationKey)==false)
+						{
+							checkmulti.put(rKey, rValue);
+							
+						}
+					}
+				}
+			}
+		    
+		   
+		    }
 	    
 	            
 	       
