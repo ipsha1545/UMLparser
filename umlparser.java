@@ -437,12 +437,23 @@ for(TypeDeclaration anyonetype : Types)
 			return URL.toString();		     
 			     
 		}
-	       public boolean checkForMultiplicity(String referenceClass,String className)
+	       public boolean checkForMultiplicity(String rClass,String className)
 	       {
 			String rValue="";
 			String rKey="";
 			String reRKey="";
 	        }
+	         
+	        if(rClass.contains("Collection"))
+		{
+			rClass = rClass.toString().replace("Collection<","");
+			rClass = rClass.replace(">", "");
+			
+			//System.out.println("strClass "+referenceClass);
+			rValue="1-*";
+			rKey=className+"~"+rClass;
+			reRKey=rClass+"~"+className; 
+		}
 	    
 	            
 	       
