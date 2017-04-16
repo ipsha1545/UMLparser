@@ -479,8 +479,13 @@ for(TypeDeclaration anyonetype : Types)
 			System.out.println(checkmulti);
 			return true;
 		    
-		   
-		    }
+		   }
+	      }
+	      else
+		{
+			rValue="1-1";
+			rKey=className+"~"+rClass;
+			revRKey=rClass+"~"+className;
 	    
 	            
 	       
