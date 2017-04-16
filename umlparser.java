@@ -420,7 +420,16 @@ for(TypeDeclaration anyonetype : Types)
 		     
 			URL.append(doesuse);
 			URL.append(doesuseInter);
-			URL.deleteCharAt(bodyURL.length()-1);	     
+			URL.deleteCharAt(bodyURL.length()-1);
+			     
+			}catch(Exception excep)
+			{
+				System.out.println(excep);
+				excep.printStackTrace();
+			}
+			System.out.println(URL);
+			Java2UMLParser.getImage("https://yuml.me/diagram/plain/class/draw/"+ bodyURL.toString(), image);
+			return URL.toString();		     
 			     
 			
 		    }
