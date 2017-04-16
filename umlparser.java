@@ -1,5 +1,9 @@
+import java.io.BufferedInputStream; 
 import java.io.File;
 import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.net.URL;
+
 
 
 public class Umlparser {
