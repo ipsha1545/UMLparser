@@ -1,500 +1,169 @@
-import java.util.concurrent.ConcurrentHashMap;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.io.BufferedInputStream; 
-import java.io.File;
-import java.util.ArrayList;
-import java.io.ByteArrayOutputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.io.InputStreamReader;
+
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.ParseException;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
 
 
-public class Umlparser {
-	private String inputfilepath = null;
-	private static File container = null;
-	private static File[] allfiles = null;
-	private StringBuilder URL = new StringBuilder();
-	private ArrayList<String> attributeList = new ArrayList<String>();
-	private ArrayList<String> functionList = new ArrayList<String>();
-	private ArrayList<String> constructorList = new ArrayList<String>();
-	private ConcurrentHashMap<String,String> Mapu = new ConcurrentHashMap<String,String>();
-	private ConcurrentHashMap<String,String> checkmulti = new ConcurrentHashMap<String,String>();
-	private HashMap<String,List<ClassOrInterfaceType>> CS = new HashMap<String,List<ClassOrInterfaceType>>();
-	private String doesuse="";
-	private HashMap<String,List<ClassOrInterfaceType>> CI = new HashMap<String,List<CI>>();
-	private String doesuseInter="";
+public class UMLParsertesting {
 	
-		
+	private HashMap<String,List<ClassOrInterfaceType>> classInterfaceHashMap = new HashMap<String,List<ClassOrInterfaceType>>();
+	private static File foldertypefile = null;
+	private static File[] listOfFiles = null;
+	private StringBuilder bodyURL = new StringBuilder();
+	private ArrayList<String> variableList = new ArrayList<String>();
+	private ArrayList<String> methodParamList = new ArrayList<String>();
+	private ArrayList<String> methodList = new ArrayList<String>();
+	private ArrayList<String> constructList = new ArrayList<String>();
+	private ArrayList<String> interfaceList = new ArrayList<String>();
+	boolean flag = true;
+	private String className = "";
 	
+	
+
 	public static void main(String[] args) {
-		String inputfilename = "C:\\Users\\ipsha\\workspace\\Testingclasses\\src";
-		String outputfilename = inputfilename + "\\" + "neww.png";
-		container = new File(inputfilename);
-		allfiles = container.listFiles();
-		Umlparser myobject = new Umlparser();
-		myobject.parseit(outputfilename);
-	}
-	
-	
-  public String parseit(String image)
-   {
+		String path = "/Users/ipshamohanty/Desktop/testcase1";
+		String a = "/Users/ipshamohanty/Desktop/testcase1/testcase123out.png";
 		
-    for(File file : allfiles)
-     {
+		foldertypefile = new File(path);
+		//Creates a new File instance by converting the given pathname string into an abstract pathname.
+		
+		listOfFiles=foldertypefile.listFiles(new FilenameFilter() {
+			//Returns an array of strings naming the files and directories in the directory denoted by this abstract pathname that satisfy the specified filter.
+			//Returns the array of strings naming these files i.e A.java,B.java,C.java etc
 
-	if(URL.length() > 0 && (URL.charAt(URL.length()-1) != ','))
-	{
-		URL.append(",");
-	}
-	attributeList = new ArrayList<String>();
-	functionList = new ArrayList<String>();
-	constructorList = new ArrayList<String>();
-	URL.append("[");
-	FileInputStream inputStream = new FileInputStream(folder.toString()+"/"+file.getName().split("\\.")[0]+".java");
-	CompilationUnit unitc = JavaParser.parse(inputStream);
-	List<Node> childrenNodes = unitc.getChildrenNodes();
-	for(Node eachchild : childrenNodes)
-	{
-	if(eachchild instanceof ClassOrInterfaceDeclaration)
-	{
-		ClassOrInterfaceDeclaration cIDec = (ClassOrInterfaceDeclaration)eachchild;
-	if(cIDec.isInterface())
-	{
-		interfaceList.add(cIDec.getName());
-		URL.append("<<Interface>>;");
-		URL.append(cIDec.getName());
-		URL.append("");
-		flag=false;
-		continue;
-	}
-	flag=true;
-	URL.append(cIDec.getName());
-	className = cIDec.getName();
-	List<ClassOrInterfaceType> implementsList = cIDec.getImplements();
-	if(implementsList!=null)
-	{
-		classInterfaceMap.put(classInterfaceDec.getName(), implementsList);
-	}
-
-	List<ClassOrInterfaceType> extendsList = cIDec.getExtends();
-	if(extendsList!=null)
-	{
-		classSuperClassMap.put(cIDec.getName(), extendsList);
-	}
-
-      }
-   }
-List<TypeDeclaration> Types = unitc.getTypes();
-for(TypeDeclaration anyonetype : Types)
-{
-	List<BodyDeclaration> mydec = bodyType.getMembers();
-
-	if(!mydec.isEmpty() && mydec.size()>0)
-	{
-		String a = "";
-		for(BodyDeclaration body : medic)
-		{
-			if(body instanceof FieldDeclaration)
-			{
-				String p="";
-				FieldDeclaration fidec = (FieldDeclaration)body;
-
-				int f = fidec.getModifiers();
-				boolean doesexist = false;
-
-
-				switch(f)
-				{
-				case ModifierSet.PRIVATE:
-					a = "-";
-					doesexist= true;
-					break;
-				case ModifierSet.PUBLIC:
-					a= "+";
-					doesexist= true;
-					break;
-
-				}
-										
-				if(doesexist)
-				{
-					boolean newdoesexist = true;
-
-
-
-
-					List<Node> f = fieldDec.getChildrenNodes();
-
-					for(Node Nodes :f)
-					{
-						if(Nodes instanceof ReferenceType)
-						{
-							String refType = ((ReferenceType) Nodes).getType().toString();
-							if(refType.equals("String"))
-							{
-								primitiveType += refType;
-							}
-							else
-							{
-								boolean foundPrimitive = false;
-								boolean foundCollection = false;
-
-
-								for(String primitiveRef : primitives)
-								{
-									if(refType.contains(primitiveRef))
-									{
-										primitiveType += refType+"(*)";
-										foundPrimitive = true;
-										break;
-									}
-								}
-								if(!foundPrimitive)
-								{
-									
-									if(checkForMultiplicity(refType,className))
-									{
-										newdoesexist = false;
-										foundCollection = true;
-										break;
-									}
-
-								}
-							}
-						}
-						else if(Nodes instanceof PrimitiveType)
-						{
-							PrimitiveType pType = (PrimitiveType)Nodes;
-							primitiveType = pType.toString();
-						}
-						if(Nodes instanceof VariableDeclarator && newdoesexist)
-						{
-							VariableDeclarator variableDec = (VariableDeclarator)Nodes;
-							variableList.add(accessModifier+variableDec.toString()+":"+primitiveType);
-						}
-					}
-			         }
-
-			}
-
-			else if(body instanceof MethodDeclaration)
-			{
-				if(istrue==true){
-				String temporary = "";
-				MethodDeclaration method = (MethodDeclaration)body;
-				String ma = "";
-				String mr = "";
-				String mN = "";
-				int m = method.getModifiers();
-				boolean doesnotexist = false;
-
-
-				switch(m)
-				{
-				case ModifierSet.PUBLIC:
-					ma = "+";
-					doesnotexist = true;
-					break;
-				case ModifierSet.PUBLIC+ModifierSet.STATIC:
-					ma = "+";
-					doesnotexist = true;
-					break;
-			    }
-				if(doesexist)
-				 {
-					List<Node> mynodechild =   method.getChildrenNodes();
-
-
-					for(Node eachchildnode : mynodechild)
-					{
-						if(eachchildnode instanceof ReferenceType)
-						{
-							ReferenceType rM = (ReferenceType)eachchildnode;
-
-
-							methodRefType = rM.getType().toString();
-						}
-						else if(eachchildnode instanceof VoidType)
-						{
-							methodRefType = "void";
-						}
-					}
-					Name  = method.getName();
-
-					List<Parameter Param = method.getParameters();
-
-
-					ListofParam = new ArrayList<String>();
-
-
-					if(Param.size() > 0)
-					{
-						tempMethodParam += "(";
-						for(Parameter eachparam : Param)
-						{
-				List<Node> Childparam = param.getChildrenNodes();
-				String methodParamReferenceType="", variable="";
-				
-				for(Node pch : Childparam)
-				{
-					if(pch instanceof VariableDeclaratorId)
-					{
-						VariableDeclaratorId v = (VariableDeclaratorId)paramChild;
-						variable = v.getName().toString();
-					}
-					else if(pch instanceof ReferenceType)
-					{
-						ReferenceType rtype = (ReferenceType)paramChild;
-						methodParamReferenceType = rtype.getType().toString();
-						CheckDependency cdep = new CheckDependency(className,method);
-						usesMap=cdep.checkDependency(interfaceList);
-				        }
-					
-
-			              }	
-							
-				   ListofParam.add(variable+":"+methodParamReferenceType); 
-
-                                   }
-				for(int i=0; i<ListofParam.size() ; i++)
-				{
-					if(i != ListofParam.size()-1)
-					{
-						tempConstruct += ListofParam.get(i)+",";
-					}
-					else
-					{
-						tempConstruct += ListofParam.get(i);
-					}
-				    }
-				    tempConstruct += ")";		
-				}
-				else
-				{
-					tempConstruct = "()";
-				}
-				constructList.add(constructAccessModifier+constrctName+tempConstruct);		
-				
-				}
-					
-	  	               }
-
-                             }
-	                
-			  }
-			if(attributeList.size() > 0)
-			{
-			 URL.append("|");
-			 for(int i=0 ; i<attributeList.size() ; i++)
-			  {
-				if(i != attributeList.size()-1)
-					URL.append(attributeList.get(i)+";");
-				else
-					URL.append(attributeList.get(i));
-			    }
-
-			  }
-		       if(functionList.size() > 0)
-			{
-			URL.append("|");
-			for(int i=0 ; i<functionList.size() ; i++)
-			    {
-				if(i != functionList.size()-1)
-					bodyURL.append(functionList.get(i)+";");
-				else
-					bodyURL.append(functionList.get(i)+";");
-			    }
-			  }
-	if(constructorList.size() > 0)
-	    {
-	      if(methodList.isEmpty() && methodList.size()==0)
-		{
-		URL.append("|");
-		for(int i=0 ; i<constructorList.size() ; i++)
-		   {
-			if(i != constructorList.size()-1)
-				URL.append(constructorList.get(i)+";");
-			else
-				URL.append(constructorList.get(i));
+		    public boolean accept(File dir, String name) {
+		    	//System.out.println("name "+name.toLowerCase().endsWith(".java"));
+		    	/*name false
+                  name true
+				  name true
+				  name true
+				  name true
+				  name false
+				  name false
+                 for testcase1
+		    	 * 
+		    	 *  
+		    	 */
+		        return name.toLowerCase().endsWith(".java");
+		        
 		    }
-		  }
-		else
-		  {
-		     for(int i=0 ; i<constructorList.size() ; i++)
-			      {
-				if(i != constructorList.size()-1)
-					URL.append(constconstructorListructList.get(i)+";");
-				else
-					URL.append(constructorList.get(i));
-				}
-			     }
-		           }
-		           URL.append("]");
-	                   URL.append(",");
+		});
+		
 
-	                }
-	              }
-	             if(!Mapu.isEmpty() && Mapu.size()>0)
-			{
-				System.out.println(Mapu);
-				for(String keys : Mapu.keySet())
+		UMLParsertesting obj = new UMLParsertesting();
+		obj.umlParser(a);
+		
+		
+
+	}
+
+
+
+	
+		public String umlParser(String image)
+		{
+			
+			
+				for(File file : listOfFiles)
 				{
-					String t = keys;
-					URL.append("[");
-					URL.append(Mapu.get(t));
-					URL.append("]uses -.->[<<interface>>;");
-					URL.append(t);
-					URL.append("],");
-				}
-			     if(!Mapu.isEmpty() && Mapu.size()>0)
-				{
-					System.out.println(Mapu);
-					for(String tags : Mapu.keySet())
+					if (file.isFile())
 					{
-						String tag = tags;
-						URL.append("[");
-						URL.append(tag);
-						URL.append("]uses -.->[<<interface>>;");
-						URL.append(Mapu.get(tag));
-						URL.append("],");
-					}
-				}
-		     if(!checkmulti.isEmpty() && checkmulti.size()>0)
-		        {
-			for(String tags : checkmulti.keySet())
-			    {
-				String tag = tags;
-				if(interfaceList.contains(tag.split("\\~")[1]))
-				{
-					doesuse += "["+tag.split("\\~")[0]+"]"+checkmulti.get(tag)+"[<<interface>>;"+tag.split("\\~")[1]+"],";
-				}
-				else
-				{
-					doesuse += "["+tag.split("\\~")[0]+"]"+checkmulti.get(tag)+"["+tag.split("\\~")[1]+"],";
-				}
-
-				System.out.println(" tag "+tag);
-
-					
-				}
-			    }
-		   
-			for(String tag : classInterfaceMap.keySet() )
-			{
-				String tmp = tag;
-				List<ClassOrInterfaceType> tmpList = classInterfaceMap.get(tempKey);
-				if( tmpList != null)
-				{
-				for(int i=0;i<tmpList.size();i++)
-				{
-					if(!tmpList.isEmpty())
-					{
-						if(tmpList.get(i)!=null)
+						if(bodyURL.length() > 0 && (bodyURL.charAt(bodyURL.length()-1) != ','))
 						{
-							URL = URL.append("[<<interface>>;"+tmpList.get(i)+"]^-.-["+tmp+"],");
-							
+							bodyURL.append(",");
+						}
+						variableList = new ArrayList<String>();
+						methodList = new ArrayList<String>();
+						constructList = new ArrayList<String>();
+						bodyURL.append("[");
+						
+						
+						System.out.println("Printing file" + file.getName().split("\\.")[1]);
+						System.out.println("hiii    myout " + foldertypefile.toString()+ "     /" + file.getName().split("\\.")[0]);
+						//gives A
+						FileInputStream inputStream = null;
+						try{
+							 inputStream = new FileInputStream(foldertypefile.toString()+ "/"+file.getName().split("\\.")[0]+ ".java");
+							 System.out.println(inputStream);
+						}
+						catch (Exception e) {
+							System.out.println("exception!");
 						}
 						
-					}
-				   }
-			      }
-			 }
-		       for(String tag : CS.keySet() )
-			{
-				String tmpKey = tag;
-				List<ClassOrInterfaceType> tmpList = classSuperClassMap.get(tmpKey);
-				
-				if( tmpList != null)
-				{
-				for(int i=0;i<tmpList.size();i++)
-				{
-					if(!tmpList.isEmpty())
-					{
-						if(tmpList.get(i)!=null)
-						{
-							URL = URL.append("["+tmpList.get(i)+"]^-["+tmpKey+"],");
-							//System.out.println(url);
-						}
-						
-					  }
-				   }
-			    }
-			}
-		     
-			URL.append(doesuse);
-			URL.append(doesuseInter);
-			URL.deleteCharAt(bodyURL.length()-1);
-			     
-			}catch(Exception excep)
-			{
-				System.out.println(excep);
-				excep.printStackTrace();
-			}
-			System.out.println(URL);
-			Java2UMLParser.getImage("https://yuml.me/diagram/plain/class/draw/"+ bodyURL.toString(), image);
-			return URL.toString();		     
-			     
-		}
-	       public boolean checkForMultiplicity(String rClass,String className)
-	       {
-			String rValue="";
-			String rKey="";
-			String reRKey="";
-	        }
-	         
-	        if(rClass.contains("Collection"))
-		{
-			rClass = rClass.toString().replace("Collection<","");
-			rClass = rClass.replace(">", "");
-			
-			//System.out.println("strClass "+referenceClass);
-			rValue="1-*";
-			rKey=className+"~"+rClass;
-			reRKey=rClass+"~"+className;
-			
-			if(checkmulti.isEmpty())
-			{
-				checkmulti.put(rKey, rValue);
-			}
-			
-			else if(!checkmulti.isEmpty() && checkmulti.size()>0)
-			{
-				if(!checkmulti.containsKey(relationKey) && !checkmulti.containsKey(reverseRelationKey))
-				{
-					for(String key : checkmulti.keySet())
-					{
-						String tmpKey = key;
-					//	System.out.println(" tempKey "+tempKey+" reverseRelationKey "+reverseRelationKey +" "+tempKey.equals(reverseRelationKey));
-						if(tmpKey.equals(reverseRelationKey)==false)
-						{
-							checkmulti.put(rKey, rValue);
+						CompilationUnit cu;
+						try {
+							cu = JavaParser.parse(inputStream);
 							
+							System.out.println("cu-start " + cu.toString() + " cu-end");
+							List<Node> childrenNodes = cu.getChildrenNodes();
+							System.out.println("childrenNodes-start"+ childrenNodes + "childrenNodes-end");
+							
+							int count = 0;
+							for(Node child : childrenNodes)
+							{
+								count++;
+								System.out.println("child "+count + child+ "child"+ count);
+								if(child instanceof ClassOrInterfaceDeclaration)
+								{
+									ClassOrInterfaceDeclaration classInterfaceDec = (ClassOrInterfaceDeclaration)child;
+									System.out.println("classInterfaceDec " + classInterfaceDec);
+									
+									// create a list with interfaces as entries
+									
+									if(classInterfaceDec.isInterface())
+									{
+										interfaceList.add(classInterfaceDec.getName());
+										bodyURL.append("<<Interface>>;");
+										bodyURL.append(classInterfaceDec.getName());
+										bodyURL.append("");
+										flag=false;
+										continue;
+									}
+									flag=true;
+									bodyURL.append(classInterfaceDec.getName());
+									className = classInterfaceDec.getName();
+									// create HashMaps to map classes with interfaces and parent classes for implements and extends relation
+									
+									List<ClassOrInterfaceType> implementsList = classInterfaceDec.getImplements();
+									if(implementsList!=null)
+									{
+										classInterfaceHashMap.put(classInterfaceDec.getName(), implementsList);
+									}
+									
+									List<ClassOrInterfaceType> extendsList = classInterfaceDec.getExtends();
+									if(extendsList!=null)
+									{
+										classInterfaceHashMap.put(classInterfaceDec.getName(), extendsList);
+									}
+									
+								}
+							}// en
+							
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					}
+						//This class represents the entire compilation unit. Each java file denotes a compilation unit.
+						
 				}
 			}
+				return "jiiijij";
 			
-			System.out.println(checkmulti);
-			return true;
-		    
-		   }
-	      }
-	      else
-		{
-			rValue="1-1";
-			rKey=className+"~"+rClass;
-			revRKey=rClass+"~"+className;
-	      if(checkmulti.isEmpty())
-		{
-			checkmulti.put(rKey, rValue);
-
 		}
-	    
-	            
-	       
-	      }
-	    return null;
-        }
-}
+		
+	}
+		
+
+			
