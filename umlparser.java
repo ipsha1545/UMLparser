@@ -442,6 +442,18 @@ public class UMLParsertesting {
 
 					     }
 							
+							if(methodList.size() > 0)
+					{
+						bodyURL.append("|");
+						for(int i=0 ; i<methodList.size() ; i++)
+						{
+							if(i != methodList.size()-1)
+								bodyURL.append(methodList.get(i)+";");
+							else
+								bodyURL.append(methodList.get(i)+";");
+						}
+					}
+							
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
