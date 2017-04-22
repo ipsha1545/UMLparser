@@ -427,10 +427,23 @@ public class UMLParsertesting {
 								}
 							}
 							
+				           if(variableList.size() > 0)
+					{
+						bodyURL.append("|");
+						for(int i=0 ; i<variableList.size() ; i++)
+						{
+							if(i != variableList.size()-1)
+								bodyURL.append(variableList.get(i)+";");
+							else
+								bodyURL.append(variableList.get(i));
+						     }
+
+					     }
+							
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+					}
 									
 				  }
 			}
