@@ -568,6 +568,24 @@ public class UMLParsertesting {
 					bodyURL.append("],");
 				}
 			}
+			if(!multiplicityMap.isEmpty() && multiplicityMap.size()>0)
+			{
+				for(String keys : multiplicityMap.keySet())
+				{
+					String tempKey = keys;
+					if(interfaceList.contains(tempKey.split("\\~")[1]))
+					{
+						usesRelation += "["+tempKey.split("\\~")[0]+"]"+multiplicityMap.get(tempKey)+"[<<interface>>;"+tempKey.split("\\~")[1]+"],";
+					}
+					else
+					{
+						usesRelation += "["+tempKey.split("\\~")[0]+"]"+multiplicityMap.get(tempKey)+"["+tempKey.split("\\~")[1]+"],";
+					}
+					System.out.println(" tempKey "+tempKey);
+					
+				}
+			}			     
+						     
 	                return "";
 			
 		}
