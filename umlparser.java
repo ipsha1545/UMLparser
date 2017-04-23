@@ -473,7 +473,12 @@ public class UMLParsertesting {
 					}
 									
 				  }
-			}
+			    }
+	                                bodyURL.append("]");
+					bodyURL.append(",");
+			
+			         }
+			}			
 				return "";
 			
 		}
