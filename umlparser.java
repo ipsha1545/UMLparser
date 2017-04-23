@@ -453,6 +453,19 @@ public class UMLParsertesting {
 								bodyURL.append(methodList.get(i)+";");
 						}
 					}
+				        if(constructList.size() > 0)
+					{
+						if(methodList.isEmpty() && methodList.size()==0)
+						{
+							bodyURL.append("|");
+							for(int i=0 ; i<constructList.size() ; i++)
+							{
+								if(i != constructList.size()-1)
+									bodyURL.append(constructList.get(i)+";");
+								else
+									bodyURL.append(constructList.get(i));
+							}
+						    }
 							
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
@@ -539,7 +552,7 @@ public class UMLParsertesting {
 			return true;
 			
 		}
-	}
+	   }
 		
 	}
 		
