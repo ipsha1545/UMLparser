@@ -553,8 +553,22 @@ public class UMLParsertesting {
 			            bodyURL.append(",");
 			
 			       }
-		       }			
-				return "";
+		       }
+						     
+			if(!usesMap.isEmpty() && usesMap.size()>0)
+			{
+				System.out.println(usesMap);
+				for(String keys : usesMap.keySet())
+				{
+					String tempKey = keys;
+					bodyURL.append("[");
+					bodyURL.append(usesMap.get(tempKey));
+					bodyURL.append("]uses -.->[<<interface>>;");
+					bodyURL.append(tempKey);
+					bodyURL.append("],");
+				}
+			}
+	                return "";
 			
 		}
 
