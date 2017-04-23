@@ -60,7 +60,82 @@ public class UMLParsertesting {
 		listOfFiles=foldertypefile.listFiles(new FilenameFilter() {
 			//Returns an array of strings naming the files and directories in the directory denoted by this abstract pathname that satisfy the specified filter.
 			//Returns the array of strings naming these files i.e A.java,B.java,C.java etc
-
+                private boolean checkForMultiplicity(String referenceClass, String className2) {
+		String relationValue="";
+		String relationKey="";
+		String reverseRelationKey="";
+		
+		if(referenceClass.contains("Collection"))
+		{
+			referenceClass = referenceClass.toString().replace("Collection<","");
+			referenceClass = referenceClass.replace(">", "");
+			
+			//System.out.println("strClass "+referenceClass);
+			relationValue="1-*";
+			relationKey=className+"~"+referenceClass;
+			reverseRelationKey=referenceClass+"~"+className;
+			/*System.out.println("relationKey "+relationKey+" - - "+"reverseRelationKey "+reverseRelationKey );
+			System.out.println(multiplicityMap.size());*/
+			if(multiplicityMap.isEmpty())
+			{
+				multiplicityMap.put(relationKey, relationValue);
+			}
+			// check key already exists
+			else if(!multiplicityMap.isEmpty() && multiplicityMap.size()>0)
+			{
+				if(!multiplicityMap.containsKey(relationKey) && !multiplicityMap.containsKey(reverseRelationKey))
+				{
+					for(String keys : multiplicityMap.keySet())
+					{
+						String tempKey = keys;
+					//	System.out.println(" tempKey "+tempKey+" reverseRelationKey "+reverseRelationKey +" "+tempKey.equals(reverseRelationKey));
+						if(tempKey.equals(reverseRelationKey)==false)
+						{
+							multiplicityMap.put(relationKey, relationValue);
+							
+						}
+					}
+				}
+			}
+			
+			System.out.println(multiplicityMap);
+			return true;
+			
+		}
+		else
+		{
+			relationValue="1-1";
+			relationKey=className+"~"+referenceClass;
+			reverseRelationKey=referenceClass+"~"+className;
+			if(multiplicityMap.isEmpty())
+			{
+				multiplicityMap.put(relationKey, relationValue);
+				
+			}
+			// check key already exists
+			else if(!multiplicityMap.isEmpty() && multiplicityMap.size()>0)
+			{
+				if(!multiplicityMap.containsKey(relationKey) && !multiplicityMap.containsKey(reverseRelationKey))
+				{
+					for(String keys : multiplicityMap.keySet())
+					{
+						String tempKey = keys;
+						//System.out.println(" tempKey "+tempKey+" reverseRelationKey "+reverseRelationKey +" "+tempKey.equals(reverseRelationKey));
+						if(tempKey.equals(reverseRelationKey)==false)
+						{
+							multiplicityMap.put(relationKey, relationValue);
+							
+						}
+					}
+				}
+			}
+			
+			System.out.println(multiplicityMap);
+			return true;
+			
+		}    
+		
+			
 		    public boolean accept(File dir, String name) {
 		    	
 		        return name.toLowerCase().endsWith(".java");
@@ -350,8 +425,8 @@ public class UMLParsertesting {
 												{
 													methodList.add(methodAccessModifier+methodName+tempMethodParam+":"+methodReferenceType);
 												}
-											}
-										}
+											   }
+										     }
 										}
 										else if(body instanceof ConstructorDeclaration)
 										{
@@ -470,93 +545,20 @@ public class UMLParsertesting {
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-					}
+					     }
 									
-				  }
-			    }
-	                                bodyURL.append("]");
-					bodyURL.append(",");
+				         }
+			            }
+	                            bodyURL.append("]");
+			            bodyURL.append(",");
 			
-			         }
-			}			
+			       }
+		       }			
 				return "";
 			
 		}
 
-	private boolean checkForMultiplicity(String referenceClass, String className2) {
-		String relationValue="";
-		String relationKey="";
-		String reverseRelationKey="";
-		
-		if(referenceClass.contains("Collection"))
-		{
-			referenceClass = referenceClass.toString().replace("Collection<","");
-			referenceClass = referenceClass.replace(">", "");
-			
-			//System.out.println("strClass "+referenceClass);
-			relationValue="1-*";
-			relationKey=className+"~"+referenceClass;
-			reverseRelationKey=referenceClass+"~"+className;
-			/*System.out.println("relationKey "+relationKey+" - - "+"reverseRelationKey "+reverseRelationKey );
-			System.out.println(multiplicityMap.size());*/
-			if(multiplicityMap.isEmpty())
-			{
-				multiplicityMap.put(relationKey, relationValue);
-			}
-			// check key already exists
-			else if(!multiplicityMap.isEmpty() && multiplicityMap.size()>0)
-			{
-				if(!multiplicityMap.containsKey(relationKey) && !multiplicityMap.containsKey(reverseRelationKey))
-				{
-					for(String keys : multiplicityMap.keySet())
-					{
-						String tempKey = keys;
-					//	System.out.println(" tempKey "+tempKey+" reverseRelationKey "+reverseRelationKey +" "+tempKey.equals(reverseRelationKey));
-						if(tempKey.equals(reverseRelationKey)==false)
-						{
-							multiplicityMap.put(relationKey, relationValue);
-							
-						}
-					}
-				}
-			}
-			
-			System.out.println(multiplicityMap);
-			return true;
-			
-		}
-		else
-		{
-			relationValue="1-1";
-			relationKey=className+"~"+referenceClass;
-			reverseRelationKey=referenceClass+"~"+className;
-			if(multiplicityMap.isEmpty())
-			{
-				multiplicityMap.put(relationKey, relationValue);
-				
-			}
-			// check key already exists
-			else if(!multiplicityMap.isEmpty() && multiplicityMap.size()>0)
-			{
-				if(!multiplicityMap.containsKey(relationKey) && !multiplicityMap.containsKey(reverseRelationKey))
-				{
-					for(String keys : multiplicityMap.keySet())
-					{
-						String tempKey = keys;
-						//System.out.println(" tempKey "+tempKey+" reverseRelationKey "+reverseRelationKey +" "+tempKey.equals(reverseRelationKey));
-						if(tempKey.equals(reverseRelationKey)==false)
-						{
-							multiplicityMap.put(relationKey, relationValue);
-							
-						}
-					}
-				}
-			}
-			
-			System.out.println(multiplicityMap);
-			return true;
-			
-		}
+	
 	   }
 		
 	}
