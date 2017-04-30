@@ -1,7 +1,3 @@
-/**
- *  Program to parse the java source code to generate yUML url that produces class diagram 
- */
-
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -67,8 +63,8 @@ public class JavacodetoUMLDiagram {
 	}
 	public static void main(String[] args) throws URISyntaxException {
 		
-		String inPath  = "/Users/ipshamohanty/Desktop/testcase1";
-		String outPath = "/Users/ipshamohanty/Desktop/o.png";
+		String inPath;
+		String outPath;
 
 		HelperLarge obj = new HelperLarge();
 		obj.umlParser(inPath,outPath);
