@@ -26,11 +26,11 @@ import com.github.javaparser.ast.type.VoidType;
 
 public class HelperLarge {
 	
-	private static String filePath = null;// "D:/projects/UMLJavaParser/src/javaparser";
+	private static String Pathoffile = null;// "D:/projects/UMLJavaParser/src/javaparser";
 	
-	private StringBuilder bodyURL = new StringBuilder();
+	private StringBuilder URLString = new StringBuilder();
 	private ArrayList<String> interfaceList = new ArrayList<String>();
-	private ArrayList<String> variableList = new ArrayList<String>();
+	private ArrayList<String> Listofvariables = new ArrayList<String>();
 	private ArrayList<String> methodParamList = new ArrayList<String>();
 	private ArrayList<String> methodList = new ArrayList<String>();
 	private ArrayList<String> constructList = new ArrayList<String>(); 
@@ -61,7 +61,7 @@ public class HelperLarge {
 	{      
 		//String inPath  = "/Users/ipshamohanty/Desktop/testcase1";
 		//String outPath = "/Users/ipshamohanty/Desktop/o.png";
-		    //Java2UMLParser j = new Java2UMLParser();
+		    //JavacodetoUMLDiagram j = new JavacodetoUMLDiagram();
 			folder = new File(inPath);
 			listOfFiles=folder.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String name) {
@@ -85,14 +85,14 @@ public class HelperLarge {
 			{
 				if (file.isFile()) 
 				{
-					if(bodyURL.length() > 0 && (bodyURL.charAt(bodyURL.length()-1) != ','))
+					if(URLString.length() > 0 && (URLString.charAt(URLString.length()-1) != ','))
 					{
-						bodyURL.append(",");
+						URLString.append(",");
 					}
-					variableList = new ArrayList<String>();
+					Listofvariables = new ArrayList<String>();
 					methodList = new ArrayList<String>();
 					constructList = new ArrayList<String>();
-					bodyURL.append("[");
+					URLString.append("[");
 					FileInputStream inputStream = new FileInputStream(folder.toString()+"/"+file.getName().split("\\.")[0]+".java");
 					CompilationUnit cu = JavaParser.parse(inputStream);
 					List<Node> childrenNodes = cu.getChildrenNodes();
@@ -107,14 +107,14 @@ public class HelperLarge {
 							if(classInterfaceDec.isInterface())
 							{
 								interfaceList.add(classInterfaceDec.getName());
-								bodyURL.append("<<Interface>>;");
-								bodyURL.append(classInterfaceDec.getName());
-								bodyURL.append("");
+								URLString.append("<<Interface>>;");
+								URLString.append(classInterfaceDec.getName());
+								URLString.append("");
 								flag=false;
 								continue;
 							}
 							flag=true;
-							bodyURL.append(classInterfaceDec.getName());
+							URLString.append(classInterfaceDec.getName());
 							className = classInterfaceDec.getName();
 							// create HashMaps to map classes with interfaces and parent classes for implements and extends relation
 							
@@ -220,7 +220,7 @@ public class HelperLarge {
 											{
 												VariableDeclarator variableDec = (VariableDeclarator)fieldNode;
 												//System.out.println(className + variableDeclarator);
-												variableList.add(accessModifier+variableDec.toString()+":"+primitiveType);
+												Listofvariables.add(accessModifier+variableDec.toString()+":"+primitiveType);
 											}
 										}
 									}
@@ -409,15 +409,15 @@ public class HelperLarge {
 						}
 					}
 					
-					if(variableList.size() > 0)
+					if(Listofvariables.size() > 0)
 					{
-						bodyURL.append("|");
-						for(int i=0 ; i<variableList.size() ; i++)
+						URLString.append("|");
+						for(int i=0 ; i<Listofvariables.size() ; i++)
 						{
-							if(i != variableList.size()-1)
-								bodyURL.append(variableList.get(i)+";");
+							if(i != Listofvariables.size()-1)
+								URLString.append(Listofvariables.get(i)+";");
 							else
-								bodyURL.append(variableList.get(i));
+								URLString.append(Listofvariables.get(i));
 						}
 
 					}
@@ -425,26 +425,26 @@ public class HelperLarge {
 
 					if(methodList.size() > 0)
 					{
-						bodyURL.append("|");
+						URLString.append("|");
 						for(int i=0 ; i<methodList.size() ; i++)
 						{
 							if(i != methodList.size()-1)
-								bodyURL.append(methodList.get(i)+";");
+								URLString.append(methodList.get(i)+";");
 							else
-								bodyURL.append(methodList.get(i)+";");
+								URLString.append(methodList.get(i)+";");
 						}
 					}
 					if(constructList.size() > 0)
 					{
 						if(methodList.isEmpty() && methodList.size()==0)
 						{
-							bodyURL.append("|");
+							URLString.append("|");
 							for(int i=0 ; i<constructList.size() ; i++)
 							{
 								if(i != constructList.size()-1)
-									bodyURL.append(constructList.get(i)+";");
+									URLString.append(constructList.get(i)+";");
 								else
-									bodyURL.append(constructList.get(i));
+									URLString.append(constructList.get(i));
 							}
 						}
 						else
@@ -452,15 +452,15 @@ public class HelperLarge {
 							for(int i=0 ; i<constructList.size() ; i++)
 							{
 								if(i != constructList.size()-1)
-									bodyURL.append(constructList.get(i)+";");
+									URLString.append(constructList.get(i)+";");
 								else
-									bodyURL.append(constructList.get(i));
+									URLString.append(constructList.get(i));
 							}
 						}
-					//	System.out.println("inside constructor list "+bodyURL);
+					//	System.out.println("inside constructor list "+URLString);
 					}
-					bodyURL.append("]");
-					bodyURL.append(",");
+					URLString.append("]");
+					URLString.append(",");
 			
 			}
 			}
@@ -470,11 +470,11 @@ public class HelperLarge {
 				for(String keys : usesMap.keySet())
 				{
 					String tempKey = keys;
-					bodyURL.append("[");
-					bodyURL.append(usesMap.get(tempKey));
-					bodyURL.append("]uses -.->[<<interface>>;");
-					bodyURL.append(tempKey);
-					bodyURL.append("],");
+					URLString.append("[");
+					URLString.append(usesMap.get(tempKey));
+					URLString.append("]uses -.->[<<interface>>;");
+					URLString.append(tempKey);
+					URLString.append("],");
 				}
 			}
 			if(!usessMap.isEmpty() && usessMap.size()>0)
@@ -483,11 +483,11 @@ public class HelperLarge {
 				for(String keys : usessMap.keySet())
 				{
 					String tempKey = keys;
-					bodyURL.append("[");
-					bodyURL.append(tempKey);
-					bodyURL.append("]uses -.->[<<interface>>;");
-					bodyURL.append(usessMap.get(tempKey));
-					bodyURL.append("],");
+					URLString.append("[");
+					URLString.append(tempKey);
+					URLString.append("]uses -.->[<<interface>>;");
+					URLString.append(usessMap.get(tempKey));
+					URLString.append("],");
 				}
 			}
 			if(!multiplicityMap.isEmpty() && multiplicityMap.size()>0)
@@ -519,7 +519,7 @@ public class HelperLarge {
 					{
 						if(tempList.get(i)!=null)
 						{
-							bodyURL = bodyURL.append("[<<interface>>;"+tempList.get(i)+"]^-.-["+tempKey+"],");
+							URLString = URLString.append("[<<interface>>;"+tempList.get(i)+"]^-.-["+tempKey+"],");
 							//System.out.println(url);
 						}
 						
@@ -542,7 +542,7 @@ public class HelperLarge {
 					{
 						if(tempList.get(i)!=null)
 						{
-							bodyURL = bodyURL.append("["+tempList.get(i)+"]^-["+tempKey+"],");
+							URLString = URLString.append("["+tempList.get(i)+"]^-["+tempKey+"],");
 							//System.out.println(url);
 						}
 						
@@ -551,18 +551,18 @@ public class HelperLarge {
 			}
 			}
 			
-			bodyURL.append(usesRelation);
-			bodyURL.append(usesInterface);
-			bodyURL.deleteCharAt(bodyURL.length()-1);
+			URLString.append(usesRelation);
+			URLString.append(usesInterface);
+			URLString.deleteCharAt(URLString.length()-1);
 		}catch(Exception e)
 		{
 			System.out.println(e);
 			e.printStackTrace();
 		}
-		System.out.println(bodyURL);
-		Helper.getImage("https://yuml.me/diagram/plain/class/draw/"+ bodyURL.toString(),image);
-		System.out.println(bodyURL.toString());
-		return bodyURL.toString();
+		System.out.println(URLString);
+		Helper.getImage("https://yuml.me/diagram/plain/class/draw/"+ URLString.toString(),image);
+		System.out.println(URLString.toString());
+		return URLString.toString();
 	  }
 	}
 
