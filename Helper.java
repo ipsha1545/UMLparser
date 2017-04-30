@@ -37,7 +37,7 @@ public class Helper {
 
 public static boolean checkForMultiplicity(String referenceClass,String className)
 {
-	ConcurrentHashMap<String,String> multiplicityMap = Java2UMLParser.getMultiplicityMap();
+	ConcurrentHashMap<String,String> multiplicityMap = JavacodetoUMLDiagram.getMultiplicityMap();
 	String relationValue="";
 	String relationKey="";
 	String reverseRelationKey="";
@@ -110,9 +110,10 @@ public static boolean checkForMultiplicity(String referenceClass,String classNam
 		System.out.println(multiplicityMap);
 		return true;
 		
-	  }
+	}
 	
   }
 
 	
 }
+
