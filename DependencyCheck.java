@@ -19,9 +19,9 @@ public class DependencyCheck {
 		private String interfaceName="";
 		private String className="";
 		private MethodDeclaration md;
-		private ConstructorDeclaration cd;
-		private static ConcurrentHashMap<String,String> usesMap = new ConcurrentHashMap<String,String>();
-		private static ConcurrentHashMap<String,String> usessMap = new ConcurrentHashMap<String,String>();
+		private ConstructorDeclaration constructdec;
+		private static ConcurrentHashMap<String,String> whetherMap = new ConcurrentHashMap<String,String>();
+		private static ConcurrentHashMap<String,String> whetherMapornot = new ConcurrentHashMap<String,String>();
 		
 		public DependencyCheck(String className,MethodDeclaration md)
 		{
@@ -32,7 +32,7 @@ public class DependencyCheck {
 		public DependencyCheck(String className,ConstructorDeclaration cd)
 		{
 			this.className=className;
-			this.cd=cd;
+			this.constructdec=cd;
 		
 		}
 		public String getInterfaceName() {
@@ -62,20 +62,20 @@ public class DependencyCheck {
 					Type temp = list.get(i).getType();
 					if(temp instanceof ReferenceType && interfaceList.contains(temp.toString()))
 					{
-						if(!usesMap.containsKey(temp))
+						if(!whetherMap.containsKey(temp))
 						{
-							usesMap.put(temp.toString(),className);
+							whetherMap.put(temp.toString(),className);
 						}
 					}
 				}
 			}
-			System.out.println(usesMap);
-			return usesMap;
+			System.out.println(whetherMap);
+			return whetherMap;
 		}
 		public ConcurrentHashMap<String, String> checkCDependency(ArrayList<String> interfaceList)
 		{
 			int count=1;
-			List<Parameter> list = cd.getParameters();
+			List<Parameter> list = constructdec.getParameters();
 			if(!list.isEmpty())
 			{
 				for(int i=0;i<list.size();i++)
@@ -85,15 +85,15 @@ public class DependencyCheck {
 					{
 					
 						System.out.println("temp value"+temp);
-						System.out.println("before"+usessMap);
-						usessMap.put(className,temp.toString());
-						System.out.println("after "+usessMap);
+						System.out.println("before"+whetherMapornot);
+						whetherMapornot.put(className,temp.toString());
+						System.out.println("after "+whetherMapornot);
 						
 					}
 				}
 			}
-			System.out.println(usessMap);
-			return usessMap;
+			System.out.println(whetherMapornot);
+			return whetherMapornot;
 		}
 
 }
